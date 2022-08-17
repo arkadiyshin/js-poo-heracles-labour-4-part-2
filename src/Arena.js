@@ -52,7 +52,7 @@ class Arena {
 
     if (!this.isTouchable(this.hero, monstr)) {
       this.message = "This monster is not touchable, please move first";
-      showMessage();
+      this.showMessage();
       return false;
     }
 
@@ -64,7 +64,7 @@ class Arena {
         this.message = `${this.hero.name} won 🗡️ ${this.hero.life} 💙  All monsters are dead!`
       }
       
-      showMessage();
+      this.showMessage();
       this.hero.updateExp(monstr);
       return true;
     } 
@@ -73,14 +73,14 @@ class Arena {
       monstr.fight(this.hero);
       if (!this.hero.isAlive()) {
         this.message = `${monstr.name} won 🗡️ ${monstr.life} 💙 ${this.hero.name} is dead !!!`
-        showMessage();
+        this.showMessage();
         monstr.updateExp(this.hero);
         return true;
       }
     }
 
     this.message = `${this.hero.name} 💙 ${this.hero.life} 🗡️ ${monstr.name} 💙 ${monstr.life}`
-    showMessage();
+    this.showMessage();
     return false;
 
   }
