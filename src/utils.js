@@ -120,7 +120,10 @@ class ArenaTemplate extends TemplateRoot {
   }
 
   makeHeroImage(arena) {
+    if(arena.hero.isAlive()){
     return `<img title="${arena.hero.name}, portée de ${arena.hero.getRange ? arena.hero.getRange() : ""}" alt="${arena.hero.name}" src="${arena.hero.image}" >`
+    }
+    return "";
   }
 
   makeMonsterImage(arena, index) {
@@ -156,11 +159,11 @@ class ArenaTemplate extends TemplateRoot {
       document.getElementById(`pos${old.x}${old.y}`).innerHTML = "";
     }
 
-    document.getElementById(`pos${arena.hero.x}${arena.hero.y}`).innerHTML = this.makeHeroImage(arena);
-
     arena.monsters.forEach((monster, index) => {
       document.getElementById(`pos${monster.x}${monster.y}`).innerHTML = this.makeMonsterImage(arena, index);
     });
+
+    document.getElementById(`pos${arena.hero.x}${arena.hero.y}`).innerHTML = this.makeHeroImage(arena);
   }
 
   setMoveEvent(arena) {

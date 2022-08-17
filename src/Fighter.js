@@ -1,7 +1,7 @@
 const MAX_LIFE = 100
 
 class Fighter {
-  constructor(name, strength, dexterity, image, x = 0 , y = 0, range = 1) {
+  constructor(name, strength, dexterity, image, x = 0 , y = 0, range = 1, experience) {
     this.name = name;
     this.strength = strength;
     this.dexterity = dexterity;
@@ -10,6 +10,7 @@ class Fighter {
     this.x = x
     this.y = y
     this.range = range
+    this.experience = experience
   }
 
 
@@ -25,14 +26,14 @@ class Fighter {
   // Calculate the total attack capacity of the fighter
   // Calcule la capacité d'attaque totale du combattant
   getDamage() {
-    return this.strength
+    return this.strength * this.getLevel();
   }
 
 
   // Calculate the total defense capacity of the fighter
   // Calcule la capacité de défense totale du combattant
   getDefense() {
-    return this.dexterity
+    return this.dexterity * this.getLevel();
   }
 
   // Generate a random value between 1 and max
@@ -49,5 +50,13 @@ class Fighter {
   // Permet de déterminer si un combattant est encore en vie
   isAlive() {
     return this.life > 0
+  }
+
+  updateExp(loser) {
+    this.experience += loser.experience;
+  }
+
+  getLevel() {
+    return Math.ceil(this.experience / 1000);
   }
 }
